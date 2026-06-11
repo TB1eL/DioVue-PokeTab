@@ -19,3 +19,29 @@
         props: { label: { type: String, default: '' } }
     }
 </script>
+
+<style scoped>
+    .loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.9rem;
+        padding: 2.5rem 0;
+    }
+
+    .ball {
+        animation: wobble 1.1s ease-in-out infinite;
+        transform-origin: center;
+        filter: drop-shadow(0 8px 16px rgba(236, 71, 71, 0.35));
+    }
+
+    .label { color: var(--muted); font-size: 0.82rem; }
+        @keyframes wobble {
+        0%, 100% { transform: rotate(-14deg); }
+        50%      { transform: rotate(14deg); }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+        .ball { animation: spin 1.4s linear infinite; }
+    }
+</style>
