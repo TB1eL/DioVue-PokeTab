@@ -38,8 +38,15 @@
             accent() { return typeColor(this.pokemon.types?.[0]) },
             accent2() { return typeColor(this.pokemon.types?.[1] || this.pokemon.types?.[0]) },
             delay() { return Math.min(this.index, 11) * 45 }
+        },
+
+        methods: {
+            onError() {
+                if (!this.triedSprite) {
+                    this.triedSprite = true
+                    this.src = spriteUrl(this.pokemon.id)
+                }
+            }
         }
     }
-
-    
 </script>
