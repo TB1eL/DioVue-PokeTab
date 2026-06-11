@@ -12,3 +12,10 @@
         <p v-if="label" class="label">{{ label }}</p>
     </div>
 </template>
+
+<script>
+    export default {
+        name: 'PokeballLoader',
+        props: { label: { type: String, default: '' } }
+    }
+</script>
