@@ -1,0 +1,59 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:        #0a0d18;
+  --ink-2:      #0f1424;
+  --surface:    rgba(255, 255, 255, 0.045);
+  --surface-2:  rgba(255, 255, 255, 0.07);
+  --stroke:     rgba(255, 255, 255, 0.08);
+  --stroke-2:   rgba(255, 255, 255, 0.14);
+  --brand:      #ec4747;
+  --brand-soft: #ff6b6b;
+  --gold:       #f5b942;
+  --text:       #eef2f9;
+  --muted:      #8d99b2;
+  --faint:      #59647d;
+  --r-sm: 10px;
+  --r:    16px;
+  --r-lg: 22px;
+  --shadow:    0 18px 50px -20px rgba(0, 0, 0, 0.7);
+  --shadow-sm: 0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --font-pixel:   'Press Start 2P', monospace;
+  --font-display: 'Outfit', 'Inter', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --maxw: 1180px;
+  --nav-h: 64px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(1100px 620px at 78% -8%, rgba(236, 71, 71, 0.16), transparent 60%),
+    radial-gradient(900px 600px at 8% 8%, rgba(77, 144, 213, 0.14), transparent 55%),
+    radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: auto, auto, 22px 22px;
+  color: var(--text);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+img { display: block; }
+
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2a3450; border-radius: 99px; border: 2px solid var(--ink); }
+::-webkit-scrollbar-thumb:hover { background: #3a4768; }
+
+::selection { background: rgba(236, 71, 71, 0.35); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--brand-soft);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
