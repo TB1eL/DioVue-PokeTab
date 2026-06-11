@@ -49,5 +49,18 @@
         font-variant-numeric: tabular-nums;
     }
 
+    .stat-bar-bg {
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 999px;
+        height: 9px;
+        overflow: hidden;
+    }
     
+    .stat-bar-fill {
+        height: 100%;
+        border-radius: 999px;
+        transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        box-shadow: 0 0 10px -2px currentColor;
+    }
+
 </style>
