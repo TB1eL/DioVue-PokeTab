@@ -24,3 +24,30 @@
         }
     }
 </script>
+
+<style scoped>
+    .stat-row {
+        display: grid;
+        grid-template-columns: 86px 36px 1fr;
+        align-items: center;
+        gap: 0.7rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .stat-name {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+
+    .stat-value {
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+
+    
+</style>
