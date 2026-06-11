@@ -66,7 +66,7 @@
             })
             }
         },
-        
+
         methods: {
             toggleGen(g) {
             this.activeGen = this.activeGen === g ? null : g
@@ -80,3 +80,73 @@
         }
     }
 </script>
+
+<style scoped>
+    .type-page { padding-bottom: 3rem; }
+
+    .page-header {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-left: 4px solid var(--accent);
+        border-radius: 12px;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1.8rem;
+    }
+    .page-icon { font-size: 2.2rem; }
+
+    .page-title {
+        font-family: 'Press Start 2P', monospace;
+        font-size: clamp(0.7rem, 2.5vw, 1rem);
+        color: var(--accent);
+        margin-bottom: 0.35rem;
+    }
+    .page-sub { font-size: 0.8rem; color: #7a8ca0; }
+
+    .search-wrap { margin-bottom: 1rem; }
+
+    .search-input {
+        width: 100%;
+        padding: 0.65rem 1.1rem;
+        border-radius: 999px;
+        border: 2px solid rgba(255,255,255,0.08);
+        background: #16213e;
+        color: #eaeaea;
+        font-size: 0.88rem;
+        outline: none;
+        transition: border-color 0.2s;
+        margin-bottom: 0.8rem;
+    }
+
+    .search-input:focus { border-color: var(--accent); }
+
+    .gen-filter { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    .gen-btn {
+        padding: 0.28rem 0.75rem;
+        border-radius: 999px;
+        border: 2px solid;
+        background: none;
+        font-size: 0.72rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+
+    .gen-btn.active { color: #fff !important; }
+
+    .result-count { font-size: 0.78rem; color: #7a8ca0; margin-bottom: 1.2rem; }
+    .result-count strong { color: #eaeaea; }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+        gap: 1rem;
+    }
+
+    .empty { text-align: center; color: #7a8ca0; margin-top: 3rem; font-size: 0.9rem; }
+    
+    .pixel { font-family: 'Press Start 2P', monospace; }
+</style>
