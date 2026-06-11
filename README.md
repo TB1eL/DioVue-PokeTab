@@ -1,38 +1,60 @@
-# DioVue-PokeTab
+# Poketab — Pokédex completa
 
-This template should help get you started developing with Vue 3 in Vite.
+Pokédex moderna construída em Vue 3 + Vite, consumindo a [PokeAPI](https://pokeapi.co)
+com os **1025 Pokémon** da Pokédex Nacional. Busca, filtros por tipo e geração,
+páginas de detalhe ricas (fraquezas, evolução, curiosidades) e visual animado.
 
-## Recommended IDE Setup
+## Grupo
+- Gabriel • João • Gabi
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Tecnologias
+- Vue.js 3 • Vue Router 4 • Vite • PokeAPI • HTML5 • CSS3 • JavaScript ES6+
 
-## Recommended Browser Setup
+## Como executar
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
+# Acesse: http://localhost:5173
 ```
 
-### Compile and Minify for Production
+Build de produção: `npm run build` (saída em `dist/`).
 
-```sh
-npm run build
+## Páginas
+| Rota | Conteúdo |
+|---|---|
+| `/` | Início: hero animado, explorar por tipo, destaques, curiosidades e novidades |
+| `/pokedex` | Lista completa da PokeAPI com busca, filtro por tipo/geração e scroll infinito |
+| `/pokedex?type=fire` | Mesma listagem já filtrada por um tipo (usado pelos atalhos da navbar) |
+| `/pokemon/:name` | Página de detalhe do Pokémon |
+
+## Funcionalidades
+1. **API completa** — todos os 1025 Pokémon via PokeAPI, com cache em memória.
+2. **Busca** por nome ou número (com debounce) e **scroll infinito**.
+3. **Filtros** por 18 tipos e 9 gerações.
+4. **Página de detalhe** com stats animados, **fraquezas/resistências/imunidades**
+   (calculadas pela tabela de tipos), cadeia de **evolução** clicável, entrada da
+   Pokédex, habilidades, dados físicos e raridade (Lendário/Mítico).
+5. **Curiosidades** e **Novidades** na página inicial.
+6. **Animações** — radar do hero, Pokébola flutuante, hover dos cards, preenchimento
+   das barras de status, transições de página (respeitando `prefers-reduced-motion`).
+7. **Responsivo** em todos os breakpoints + **ícone próprio** (`public/favicon.svg`).
+
+## Estrutura
+```
+src/
+├── api/pokeapi.js        — cliente da PokeAPI (índice, pokémon, espécie, evolução)
+├── assets/global.css     — design tokens, animações e estilos base
+├── components/
+│   ├── NavBar.vue         — navegação responsiva (logo Poketab + atalhos)
+│   ├── PokemonCard.vue    — card que navega para a página de detalhe
+│   ├── StatBar.vue        — barra de estatística animada
+│   ├── TypeBadge.vue      — badge colorido de tipo
+│   └── PokeballLoader.vue — loader em SVG
+├── router/index.js
+├── utils/
+│   ├── format.js          — cores/labels de tipo, gerações, helpers
+│   └── typeChart.js       — tabela de efetividade de tipos (fraquezas)
+└── views/
+    ├── Home.vue • Pokedex.vue • PokemonDetail.vue
 ```
