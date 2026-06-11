@@ -20,3 +20,29 @@
     </header>
 </template>
 
+<script>
+    import { TYPE_EMOJI, typeColor, typeLabel } from '../utils/format.js'
+
+    export default {
+        name: 'NavBar',
+        data() {
+            return {
+                menuOpen: false,
+                quickTypes: ['fire', 'water', 'grass', 'electric'].map(type => ({
+                    type,
+                    emoji: TYPE_EMOJI[type],
+                    label: typeLabel(type),
+                    color: typeColor(type)
+                }))
+            }
+        },
+        
+        watch: {
+            $route() { this.close() }
+        },
+
+        methods: {
+            close() { this.menuOpen = false }
+        }
+    }
+</script>
