@@ -24,7 +24,29 @@
         <button v-if="search" class="clear-search" @click="search=''; rebuild()" aria-label="Limpar busca">✕</button>
       </div>
 
+      <!-- Tipos -->
+      <div class="chip-row">
+        <button
+          v-for="t in allTypes"
+          :key="t"
+          class="chip type-chip"
+          :class="{ active: activeType === t }"
+          :style="{ '--c': typeColor(t) }"
+          @click="setType(t)"
+        >{{ typeLabel(t) }}</button>
+      </div>
 
+      <!-- Gerações -->
+      <div class="chip-row gens">
+        <button
+          v-for="g in generations"
+          :key="g.id"
+          class="chip gen-chip"
+          :class="{ active: activeGen === g.id }"
+          @click="setGen(g.id)"
+        >{{ g.label }}</button>
+        <button v-if="hasFilters" class="chip clear-all" @click="clearFilters">Limpar filtros ✕</button>
+      </div>
     </div>
 
     <!-- Contagem -->
