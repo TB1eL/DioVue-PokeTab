@@ -9,6 +9,20 @@
 
     <!-- Controles -->
     <div class="controls">
+      <div class="search-box">
+        <svg class="s-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" />
+        </svg>
+        <input
+          v-model="search"
+          @input="debouncedRebuild"
+          type="text"
+          class="search-input"
+          placeholder="Buscar Pokémon por nome ou número…"
+          aria-label="Buscar Pokémon"
+        />
+        <button v-if="search" class="clear-search" @click="search=''; rebuild()" aria-label="Limpar busca">✕</button>
+      </div>
 
 
     </div>
