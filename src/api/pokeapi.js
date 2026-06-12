@@ -30,3 +30,16 @@ export function spriteUrl(id) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 }
 
+let indexCache = null
+
+/** Índice completo da Pokédex Nacional: [{ id, name }]. */
+export async function getIndex() {
+  if (indexCache) return indexCache
+  const data = await getJSON(`${BASE}/pokemon?limit=20000`)
+  indexCache = data.results
+    .map(p => ({ id: idFromUrl(p.url), name: p.name }))
+    .filter(p => p.id && p.id <= MAX_DEX)
+    .sort((a, b) => a.id - b.id)
+  return indexCache
+}
+
