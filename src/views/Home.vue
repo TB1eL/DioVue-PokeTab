@@ -38,6 +38,25 @@
       </div>
     </section>
 
+    <!-- ============ TIPOS ============ -->
+    <section class="block">
+      <div class="block-head">
+        <h2 class="block-title">Explorar por tipo</h2>
+        <router-link to="/pokedex" class="block-link">Ver todos →</router-link>
+      </div>
+      <div class="type-grid">
+        <router-link
+          v-for="t in featuredTypes"
+          :key="t"
+          :to="`/pokedex?type=${t}`"
+          class="type-tile"
+          :style="{ '--c': typeColor(t) }"
+        >
+          <span class="type-emoji">{{ emoji(t) }}</span>
+          <span class="type-name">{{ typeLabel(t) }}</span>
+        </router-link>
+      </div>
+    </section>
 
 
 
@@ -178,6 +197,28 @@ export default {
   font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
   color: var(--muted); border: 1px solid var(--stroke-2); padding: 0.3rem 0.7rem; border-radius: 999px;
 }
+
+/* Tipos */
+.type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.8rem;
+}
+.type-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  padding: 1.1rem 0.6rem;
+  border-radius: var(--r);
+  background: radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--c) 26%, transparent), var(--surface));
+  border: 1px solid var(--stroke);
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.type-tile:hover {
+  transform: translateY(-4px);
+  border-color: var(--c);
+  box-shadow: 0 16px 30px -18px var(--c);
+}
+.type-emoji { font-size: 1.7rem; }
+.type-name { font-weight: 700; font-size: 0.88rem; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 760px) {
