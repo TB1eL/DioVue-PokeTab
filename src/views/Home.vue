@@ -58,6 +58,19 @@
       </div>
     </section>
 
+    <!-- ============ DESTAQUES ============ -->
+    <section class="block">
+      <div class="block-head">
+        <h2 class="block-title">Pokémon em destaque</h2>
+        <router-link to="/pokedex" class="block-link">Explorar →</router-link>
+      </div>
+      <div v-if="featured.length" class="featured-grid">
+        <PokemonCard v-for="(p, i) in featured" :key="p.id" :pokemon="p" :index="i" />
+      </div>
+      <div v-else class="featured-grid">
+        <div v-for="n in 5" :key="n" class="skeleton card-skel"></div>
+      </div>
+    </section>
 
 
   </div>
@@ -219,6 +232,14 @@ export default {
 }
 .type-emoji { font-size: 1.7rem; }
 .type-name { font-weight: 700; font-size: 0.88rem; }
+
+/* Destaques */
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 1.1rem;
+}
+.card-skel { height: 226px; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 760px) {
