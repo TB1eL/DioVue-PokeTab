@@ -102,11 +102,3 @@ export async function getEvolutionChain(url) {
   return chain
 }
 
-/** Lista de Pokémon de um tipo (para o filtro): [{ id, name }]. */
-export async function getByType(type) {
-  const data = await getJSON(`${BASE}/type/${type}`)
-  return data.pokemon
-    .map(p => ({ id: idFromUrl(p.pokemon.url), name: p.pokemon.name }))
-    .filter(p => p.id && p.id <= MAX_DEX)
-    .sort((a, b) => a.id - b.id)
-}
