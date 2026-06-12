@@ -127,6 +127,13 @@ export default {
     await this.applyType(this.$route.query.type)
     this.$nextTick(this.setupObserver)
   },
+  // Reage à mudança de ?type na URL — necessário quando já estamos na Pokédex
+  // e clicamos num atalho de tipo na navbar (a view não é remontada).
+  watch: {
+    '$route.query.type'(val) {
+      if (this.ready) this.applyType(val)
+    }
+  },
   beforeUnmount() {
     if (this.observer) this.observer.disconnect()
   },
@@ -289,7 +296,20 @@ export default {
   display: flex; gap: 0.4rem;
   overflow-x: auto;
   padding-bottom: 0.55rem;
+  /* máscara que esmaece as bordas, indicando que há mais conteúdo ao rolar */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+  scrollbar-width: thin;
+  scrollbar-color: var(--stroke-2) transparent;
 }
+.chip-row::-webkit-scrollbar { height: 5px; }
+.chip-row::-webkit-scrollbar-track { background: transparent; }
+.chip-row::-webkit-scrollbar-thumb {
+  background: var(--stroke-2);
+  border: none;
+  border-radius: 99px;
+}
+.chip-row::-webkit-scrollbar-thumb:hover { background: var(--brand-soft); }
 .chip {
   flex: 0 0 auto;
   padding: 0.4rem 0.9rem;
