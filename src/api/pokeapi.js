@@ -64,28 +64,3 @@ export async function getPokemon(idOrName) {
   }
 }
 
-/** Informações da espécie: descrição, categoria, raridade, evolução. */
-export async function getSpecies(idOrName) {
-  const data = await getJSON(`${BASE}/pokemon-species/${idOrName}`)
-
-  // Preferimos a entrada em inglês mais recente (a PokeAPI não tem pt-BR).
-  const flavor = [...data.flavor_text_entries]
-    .reverse()
-    .find(e => e.language.name === 'en')
-  const genus = data.genera.find(g => g.language.name === 'en')
-
-  return {
-    flavorText: flavor ? flavor.flavor_text.replace(/[\n\f\r]/g, ' ') : '',
-    genus: genus ? genus.genus : '',
-    isLegendary: data.is_legendary,
-    isMythical: data.is_mythical,
-    color: data.color?.name,
-    habitat: data.habitat?.name || null,
-    captureRate: data.capture_rate,
-    baseHappiness: data.base_happiness,
-    growthRate: data.growth_rate?.name,
-    eggGroups: data.egg_groups.map(g => g.name),
-    evolutionChainUrl: data.evolution_chain?.url
-  }
-}
-
