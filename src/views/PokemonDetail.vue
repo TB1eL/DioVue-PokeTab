@@ -90,8 +90,64 @@
 
         <!-- Coluna direita -->
         <div class="col">
+          <!-- Stats -->
+          <section class="card">
+            <h2 class="card-title">📊 Status base</h2>
+            <StatBar
+              v-for="s in poke.stats"
+              :key="s.name"
+              :name="s.name"
+              :value="s.value"
+              :color="accent"
+            />
+            <div class="total">
+              <span>Total</span>
+              <strong>{{ poke.totalStats }}</strong>
+            </div>
+          </section>
 
+          <!-- Fraquezas e resistências -->
+          <section class="card">
+            <h2 class="card-title">⚔️ Efetividade de tipo</h2>
 
+            <div class="matchup-group" v-if="matchups.weaknesses.length">
+              <p class="matchup-label weak">Fraco contra</p>
+              <div class="matchup-row">
+                <span v-for="m in matchups.weaknesses" :key="m.type" class="matchup" :style="{ '--c': typeColor(m.type) }">
+                  {{ typeLabel(m.type) }} <b>{{ multLabel(m.multiplier) }}</b>
+                </span>
+              </div>
+            </div>
+
+            <div class="matchup-group" v-if="matchups.resistances.length">
+              <p class="matchup-label resist">Resiste a</p>
+              <div class="matchup-row">
+                <span v-for="m in matchups.resistances" :key="m.type" class="matchup" :style="{ '--c': typeColor(m.type) }">
+                  {{ typeLabel(m.type) }} <b>{{ multLabel(m.multiplier) }}</b>
+                </span>
+              </div>
+            </div>
+
+            <div class="matchup-group" v-if="matchups.immunities.length">
+              <p class="matchup-label immune">Imune a</p>
+              <div class="matchup-row">
+                <span v-for="m in matchups.immunities" :key="m.type" class="matchup" :style="{ '--c': typeColor(m.type) }">
+                  {{ typeLabel(m.type) }} <b>0×</b>
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Mais curiosidades -->
+          <section class="card">
+            <h2 class="card-title">🔎 Mais sobre</h2>
+            <div class="facts">
+              <div v-if="species.habitat" class="fact"><span>Habitat</span><strong>{{ prettyName(species.habitat) }}</strong></div>
+              <div v-if="species.growthRate" class="fact"><span>Crescimento</span><strong>{{ prettyName(species.growthRate) }}</strong></div>
+              <div v-if="species.eggGroups.length" class="fact"><span>Grupo ovo</span><strong>{{ species.eggGroups.map(prettyName).join(', ') }}</strong></div>
+              <div class="fact"><span>Captura</span><strong>{{ species.captureRate ?? '—' }}/255</strong></div>
+            </div>
+          </section>
         </div>
       </div>
     </template>
