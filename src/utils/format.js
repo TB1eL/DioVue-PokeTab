@@ -53,3 +53,27 @@ export function statLabel(stat) {
   return STAT_LABELS[stat] || stat
 }
 
+// #007, #025, #1025 — sempre com 3 dígitos no mínimo.
+export function pad(id) {
+  return '#' + String(id).padStart(3, '0')
+}
+
+export function genFromId(id) {
+  const g = GENERATIONS.find(g => id >= g.range[0] && id <= g.range[1])
+  return g ? g.label : '—'
+}
+
+// Capitaliza e troca hífens por espaços (mr-mime -> Mr Mime).
+export function prettyName(name = '') {
+  return name
+    .split('-')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
+}
+
+// Constrói um gradiente a partir de um ou dois tipos (para auras e cards).
+export function typeGradient(types = []) {
+  const c1 = typeColor(types[0])
+  const c2 = typeColor(types[1] || types[0])
+  return `linear-gradient(135deg, ${c1}, ${c2})`
+}
