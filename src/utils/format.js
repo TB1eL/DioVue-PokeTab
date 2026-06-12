@@ -22,22 +22,3 @@ export const TYPE_EMOJI = {
   ice: '❄️', dragon: '🐉', dark: '🌙', fairy: '✨', ghost: '👻'
 }
 
-// Rótulos em português para os atributos de status.
-export const STAT_LABELS = {
-  hp: 'HP', attack: 'Ataque', defense: 'Defesa',
-  'special-attack': 'Atq. Esp.', 'special-defense': 'Def. Esp.', speed: 'Velocidade'
-}
-
-// Faixas de ID de cada geração, usadas no filtro.
-export const GENERATIONS = [
-  { id: 1, label: 'Gen I', range: [1, 151] },
-  { id: 2, label: 'Gen II', range: [152, 251] },
-  { id: 3, label: 'Gen III', range: [252, 386] },
-  { id: 4, label: 'Gen IV', range: [387, 493] },
-  { id: 5, label: 'Gen V', range: [494, 649] },
-  { id: 6, label: 'Gen VI', range: [650, 721] },
-  { id: 7, label: 'Gen VII', range: [722, 809] },
-  { id: 8, label: 'Gen VIII', range: [810, 905] },
-  { id: 9, label: 'Gen IX', range: [906, 1025] }
-]
-
