@@ -23,4 +23,35 @@ const CHART = {
 
 const ALL_TYPES = Object.keys(CHART)
 
+/**
+ * Calcula como cada tipo de ataque afeta um Pokémon com os tipos informados.
+ * Retorna { weaknesses, resistances, immunities } como arrays de
+ * { type, multiplier } ordenados pela intensidade.
+ */
+export function typeMatchups(defenderTypes = []) {
+  const result = {}
+  for (const atk of ALL_TYPES) {
+    let mult = 1
+    for (const def of defenderTypes) {
+      const m = CHART[atk]?.[def]
+      if (m !== undefined) mult *= m
+    }
+    result[atk] = mult
+  }
+
+  const weaknesses = []
+  const resistances = []
+  const immunities = []
+  for (const [type, multiplier] of Object.entries(result)) {
+    if (multiplier === 0) immunities.push({ type, multiplier })
+    else if (multiplier > 1) weaknesses.push({ type, multiplier })
+    else if (multiplier < 1) resistances.push({ type, multiplier })
+  }
+
+  weaknesses.sort((a, b) => b.multiplier - a.multiplier)
+  resistances.sort((a, b) => a.multiplier - b.multiplier)
+
+  return { weaknesses, resistances, immunities }
+}
+
 export { ALL_TYPES }
