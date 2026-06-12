@@ -1,11 +1,33 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div id="app-wrapper">
+    <NavBar />
+    <main>
+      <router-view v-slot="{ Component }">
+        <transition name="page" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </main>
+  </div>
 </template>
 
-<style scoped></style>
+<script>
+import NavBar from './components/NavBar.vue'
+export default {
+  name: 'App',
+  components: { NavBar }
+}
+</script>
+
+<style>
+#app-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 2rem 1.2rem 3rem;
+}
+@media (max-width: 600px) { main { padding: 1.4rem 0.9rem 2.5rem; } }
+
+</style>
