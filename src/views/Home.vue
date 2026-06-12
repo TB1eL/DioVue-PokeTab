@@ -72,7 +72,42 @@
       </div>
     </section>
 
+    <!-- ============ CURIOSIDADES ============ -->
+    <section class="block">
+      <div class="block-head">
+        <h2 class="block-title">Curiosidades</h2>
+        <span class="block-tag">Você sabia?</span>
+      </div>
+      <div class="curio-grid">
+        <article
+          v-for="(c, i) in curiosities"
+          :key="i"
+          class="curio rise"
+          :style="{ animationDelay: i * 60 + 'ms' }"
+        >
+          <span class="curio-icon">{{ c.icon }}</span>
+          <h3 class="curio-title">{{ c.title }}</h3>
+          <p class="curio-text">{{ c.text }}</p>
+        </article>
+      </div>
+    </section>
 
+    <!-- ============ NOVIDADES ============ -->
+    <section class="block">
+      <div class="block-head">
+        <h2 class="block-title">Novidades</h2>
+        <span class="block-tag">Mundo Pokémon</span>
+      </div>
+      <div class="news-list">
+        <article v-for="(n, i) in news" :key="i" class="news" :style="{ '--c': n.color }">
+          <span class="news-badge">{{ n.tag }}</span>
+          <div class="news-body">
+            <h3 class="news-title">{{ n.title }}</h3>
+            <p class="news-text">{{ n.text }}</p>
+          </div>
+        </article>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -240,6 +275,46 @@ export default {
   gap: 1.1rem;
 }
 .card-skel { height: 226px; }
+
+/* Curiosidades */
+.curio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.curio {
+  padding: 1.3rem;
+  border-radius: var(--r);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  transition: transform 0.2s, border-color 0.2s;
+}
+.curio:hover { transform: translateY(-3px); border-color: var(--stroke-2); }
+.curio-icon { font-size: 1.7rem; display: block; margin-bottom: 0.6rem; }
+.curio-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; }
+.curio-text { color: var(--muted); font-size: 0.88rem; line-height: 1.55; }
+
+/* Novidades */
+.news-list { display: flex; flex-direction: column; gap: 0.8rem; }
+.news {
+  display: flex; align-items: center; gap: 1.1rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--r);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  border-left: 4px solid var(--c);
+  transition: transform 0.2s, background 0.2s;
+}
+.news:hover { transform: translateX(4px); background: var(--surface-2); }
+.news-badge {
+  flex: 0 0 auto;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 18%, transparent);
+  padding: 0.4rem 0.7rem; border-radius: 999px;
+}
+.news-title { font-family: var(--font-display); font-size: 1.02rem; font-weight: 700; margin-bottom: 0.2rem; }
+.news-text { color: var(--muted); font-size: 0.86rem; line-height: 1.5; }
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 760px) {
