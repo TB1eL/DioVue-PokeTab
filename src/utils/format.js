@@ -41,25 +41,3 @@ export const GENERATIONS = [
   { id: 9, label: 'Gen IX', range: [906, 1025] }
 ]
 
-export function typeColor(type) {
-  return TYPE_COLORS[type?.toLowerCase()] || '#777'
-}
-
-export function typeLabel(type) {
-  return TYPE_LABELS_PT[type?.toLowerCase()] || type
-}
-
-export function statLabel(stat) {
-  return STAT_LABELS[stat] || stat
-}
-
-// #007, #025, #1025 — sempre com 3 dígitos no mínimo.
-export function pad(id) {
-  return '#' + String(id).padStart(3, '0')
-}
-
-export function genFromId(id) {
-  const g = GENERATIONS.find(g => id >= g.range[0] && id <= g.range[1])
-  return g ? g.label : '—'
-}
-
