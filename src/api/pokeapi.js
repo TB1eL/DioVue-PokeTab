@@ -30,37 +30,3 @@ export function spriteUrl(id) {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 }
 
-let indexCache = null
-
-/** Índice completo da Pokédex Nacional: [{ id, name }]. */
-export async function getIndex() {
-  if (indexCache) return indexCache
-  const data = await getJSON(`${BASE}/pokemon?limit=20000`)
-  indexCache = data.results
-    .map(p => ({ id: idFromUrl(p.url), name: p.name }))
-    .filter(p => p.id && p.id <= MAX_DEX)
-    .sort((a, b) => a.id - b.id)
-  return indexCache
-}
-
-/** Detalhe normalizado de um Pokémon (stats, tipos, físico, habilidades). */
-export async function getPokemon(idOrName) {
-  const data = await getJSON(`${BASE}/pokemon/${idOrName}`)
-  return {
-    id: data.id,
-    name: data.name,
-    types: data.types.map(t => t.type.name),
-    stats: data.stats.map(s => ({ name: s.stat.name, value: s.base_stat })),
-    totalStats: data.stats.reduce((sum, s) => sum + s.base_stat, 0),
-    height: data.height / 10, // metros
-    weight: data.weight / 10, // kg
-    abilities: data.abilities.map(a => ({
-      name: a.ability.name,
-      hidden: a.is_hidden
-    })),
-    baseExperience: data.base_experience,
-    artwork: data.sprites?.other?.['official-artwork']?.front_default || artworkUrl(data.id),
-    sprite: data.sprites?.front_default || spriteUrl(data.id)
-  }
-}
-
