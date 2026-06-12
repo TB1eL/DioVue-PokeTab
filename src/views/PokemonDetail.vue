@@ -42,12 +42,50 @@
         </div>
       </header>
 
+      <!-- Entrada da Pokédex (curiosidade) -->
+      <section v-if="species.flavorText" class="card entry">
+        <h2 class="card-title">📖 Entrada da Pokédex</h2>
+        <p class="entry-text">{{ species.flavorText }}</p>
+      </section>
 
       <div class="cols">
         <!-- Coluna esquerda -->
         <div class="col">
+          <!-- Físico -->
+          <section class="card">
+            <h2 class="card-title">📐 Dados físicos</h2>
+            <div class="facts">
+              <div class="fact"><span>Altura</span><strong>{{ poke.height.toFixed(1) }} m</strong></div>
+              <div class="fact"><span>Peso</span><strong>{{ poke.weight.toFixed(1) }} kg</strong></div>
+              <div class="fact"><span>Exp. base</span><strong>{{ poke.baseExperience || '—' }}</strong></div>
+              <div class="fact"><span>Felicidade</span><strong>{{ species.baseHappiness ?? '—' }}</strong></div>
+            </div>
+          </section>
 
+          <!-- Habilidades -->
+          <section class="card">
+            <h2 class="card-title">🎯 Habilidades</h2>
+            <div class="abilities">
+              <span v-for="a in poke.abilities" :key="a.name" class="ability" :class="{ hidden: a.hidden }">
+                {{ prettyName(a.name) }}
+                <em v-if="a.hidden">oculta</em>
+              </span>
+            </div>
+          </section>
 
+          <!-- Evolução -->
+          <section v-if="evolution.length > 1" class="card">
+            <h2 class="card-title">🔄 Linha evolutiva</h2>
+            <div class="evo">
+              <template v-for="(e, i) in evolution" :key="e.id">
+                <router-link :to="`/pokemon/${e.name}`" class="evo-item" :class="{ current: e.id === poke.id }">
+                  <img :src="evoSprite(e.id)" :alt="prettyName(e.name)" loading="lazy" />
+                  <span>{{ prettyName(e.name) }}</span>
+                </router-link>
+                <span v-if="i < evolution.length - 1" class="evo-arrow">→</span>
+              </template>
+            </div>
+          </section>
         </div>
 
         <!-- Coluna direita -->
